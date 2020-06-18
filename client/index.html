@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>test</title>
+  <meta name="description" content="Blogging with Node">
+  <meta name="Gordon" content="">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <form onsubmit="loginSubmit()">
+        <label for="username">Username</label>
+        <input type="text" id="usernameInput">
+        <label for="password">Password</label>
+        <input type="password" id="passwordInput">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+<script>
+    const api = "http://localhost:3000/api";
+
+    async function postData(url = '', data = {}) {
+        const response = await fetch(url, {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            redirect: 'follow', 
+            body: JSON.stringify(data)
+        });
+        return response.json();
+    }
+
+    async function loginSubmit() {
+        const username = document.getElementById('usernameInput').value;
+        const password = document.getElementById('passwordInput').value;
+
+        const response = await postData('http://localhost:3000/api/login', {username, password});
+        alert(response);
+        return response.json;
+    }
+ 
+</script>
+</html>

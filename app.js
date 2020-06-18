@@ -7,6 +7,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors');
 
 //set up mongoose connection
 var mongoose = require('mongoose')
@@ -17,6 +18,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 var app = express();
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
